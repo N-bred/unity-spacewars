@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false;
+        
         _rigidBody = GetComponent<Rigidbody>();    
     }
 

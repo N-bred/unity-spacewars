@@ -5,15 +5,18 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
 
-    float _speed = 20f;
+    float _speed = 50f;
     Rigidbody _rigidbody;
     Vector3 _velocity;
+    Renderer _renderer;
+
 
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _rigidbody.velocity = Vector3.down * _speed;
+        _rigidbody.velocity = Vector3.up * _speed;
+        _renderer = GetComponent<Renderer>();
     }
 
     void Update()
@@ -25,6 +28,12 @@ public class Ball : MonoBehaviour
     {
         _rigidbody.velocity = _rigidbody.velocity.normalized * _speed;
         _velocity = _rigidbody.velocity;
+
+        if (!_renderer.isVisible)
+        {
+            GameManager.Instance.Remaining--;
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
